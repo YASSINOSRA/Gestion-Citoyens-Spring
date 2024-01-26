@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Citoyens</title>
+
+  <!-- Add CSS styling and background image -->
+  <style>
+    body {
+      background-image: url('https://images8.alphacoders.com/133/1331544.png');
+      background-size: cover;
+      color: white; /* Text color */
+      font-family: 'Arial', sans-serif; /* Choose your font-family */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    nav a {
+      color: white; /* Link color */
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    h2 {
+      color: white; /* Heading color */
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin: 20px auto;
+    }
+
+    th, td {
+      border: 1px solid white;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #333; /* Header background color */
+    }
+
+    tbody {
+      background-color: rgba(255, 255, 255, 0.3); /* Table body background color */
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a th:href="@{/centres/ajouter}">Ajouter un Centre de Vaccination</a>
+  <a th:href="@{/centres/afficher}">Afficher les Centres des Vaccinations</a>
+  <a th:href="@{/citoyens/ajouter}">Ajouter un Citoyen</a>
+</nav>
+
+<h2>Liste des Citoyens</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Centre de Vaccination</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="citoyen : ${citoyens}">
+    <td th:text="${citoyen.nom}"></td>
+    <td th:text="${citoyen.centreVaccination != null ? citoyen.centreVaccination.nom : 'N/A'}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

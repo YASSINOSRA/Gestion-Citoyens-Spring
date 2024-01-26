@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afficher Centres de Vaccination</title>
+
+    <!-- Add CSS styling and background image -->
+    <style>
+        body {
+            background-image: url('https://images8.alphacoders.com/133/1331544.png');
+            background-size: cover;
+            color: white; /* Text color */
+            font-family: 'Arial', sans-serif; /* Choose your font-family */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: white; /* Heading color */
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Navbar background color */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        table {
+            width: 80%;
+            margin-top: 20px;
+            border-collapse: collapse;
+
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Table box shadow */
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Border color between rows */
+        }
+
+        th {
+            background-color: #333; /* Header background color */
+
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav>
+    <a th:href="@{/centres/ajouter}">Ajouter un Centre de Vaccination</a>
+    <a th:href="@{/centres/afficher}">Afficher les Centres des Vaccinations</a>
+    <a th:href="@{/citoyens/ajouter}">Ajouter un Citoyen</a>
+</nav>
+
+<h2>Afficher Centres de Vaccination</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>Citoyens</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="centre : ${centres}">
+        <td th:text="${centre.nom}" />
+        <td th:text="${centre.adresse}" />
+        <td>
+            <ul th:if="${centre.citoyens != null}">
+                <li th:each="citoyen : ${centre.citoyens}" th:text="${citoyen.nom}" />
+            </ul>
+            <span th:if="${centre.citoyens == null || #lists.isEmpty(centre.citoyens)}">Aucun citoyen</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
